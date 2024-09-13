@@ -12,5 +12,5 @@ types-PyYAML
 scipy
 gdown
 gradio==3.50.2
-pydantic==1.10.18
+pydantic==1.10.18 
 -e .
