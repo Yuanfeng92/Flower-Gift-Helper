@@ -1,0 +1,66 @@
+stages:
+  data_ingestion:
+    cmd: python src/flowerClassifier/pipeline/step_1_data_ingestion.py
+    deps:
+      - src/flowerClassifier/pipeline/step_1_data_ingestion.py
+      - constant/config.yaml
+    params:
+      - TEST_SPLIT
+    outs:
+      - artifacts/data_ingestion/model
+
+
+  prepare_base_model:
+    cmd: python src/flowerClassifier/pipeline/step_2_prepare_base_model.py
+    deps:
+      - src/flowerClassifier/pipeline/step_2_prepare_base_model.py
+      - constant/config.yaml
+    params:
+      - IMAGE_SIZE
+      - LEARNING_RATE
+      - INCLUDE_TOP
+      - WEIGHTS
+      - NUM_CLASSES
+    outs:
+      - artifacts/model_folder/base_model_updated.keras
+
+
+  model_training:
+    cmd: python src/flowerClassifier/pipeline/step_3_train_base_model.py
+    deps:
+      - src/flowerClassifier/pipeline/step_3_train_base_model.py
+      - constant/config.yaml
+      - artifacts/data_ingestion/model
+      - artifacts/model_folder/base_model_updated.keras
+    params:
+      - VALIDATION_SPLIT
+      - IMAGE_SIZE
+      - BATCH_SIZE
+      - EARLY_STOPPING
+      - EPOCHS
+      - LEARNING_RATE
+    outs:
+      - artifacts/model_folder/trained_model.keras
+
+      
+  evaluation:
+    cmd: python src/flowerClassifier/pipeline/step_4_model_evaluation.py
+    deps:
+      - src/flowerClassifier/pipeline/step_4_model_evaluation.py
+      - constant/config.yaml
+      - artifacts/data_ingestion/model
+      - artifacts/model_folder/trained_model.keras
+    params:
+      - TEST_SPLIT
+      - VALIDATION_SPLIT
+      - AUGMENTATION
+      - EARLY_STOPPING
+      - IMAGE_SIZE
+      - BATCH_SIZE
+      - INCLUDE_TOP
+      - EPOCHS
+      - NUM_CLASSES
+      - WEIGHTS
+      - LEARNING_RATE
+    metrics:
+      - metrics.json

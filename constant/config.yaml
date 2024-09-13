@@ -1,0 +1,18 @@
+artifacts_root_dir: artifacts
+
+data_ingestion:
+    folder_dir: artifacts/data_ingestion
+    source_URL: "https://drive.google.com/file/d/1fQyEq3wMn5hmonwp632xlGTTtDzVxFZz/view?usp=sharing"
+    data_file_path: artifacts/data_ingestion/data.zip
+    unzip_folder_dir: artifacts/data_ingestion/dataset
+    data_dir: artifacts/data_ingestion/dataset/train
+    train_dir: artifacts/data_ingestion/model/train
+    test_dir: artifacts/data_ingestion/model/test
+
+prepare_base_model:
+    folder_dir: artifacts/model_folder
+    base_model_path: artifacts/model_folder/base_model.keras
+    updated_model_path: artifacts/model_folder/base_model_updated.keras
+
+model_training:
+    trained_model_path: artifacts/model_folder/trained_model.keras

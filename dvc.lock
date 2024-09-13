@@ -1,0 +1,125 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/flowerClassifier/pipeline/step_1_data_ingestion.py
+    deps:
+    - path: constant/config.yaml
+      hash: md5
+      md5: 92c03c76cd18c4c2ec010d5072a8da87
+      size: 746
+    - path: src/flowerClassifier/pipeline/step_1_data_ingestion.py
+      hash: md5
+      md5: 1728d144019b08e9932b45a301973ca2
+      size: 943
+    params:
+      params.yaml:
+        TEST_SPLIT: 0.1
+    outs:
+    - path: artifacts/data_ingestion/model
+      hash: md5
+      md5: c5129b327deb7bc3cd78fd098312ed5b.dir
+      size: 168164757
+      nfiles: 2746
+  prepare_base_model:
+    cmd: python src/flowerClassifier/pipeline/step_2_prepare_base_model.py
+    deps:
+    - path: constant/config.yaml
+      hash: md5
+      md5: 92c03c76cd18c4c2ec010d5072a8da87
+      size: 746
+    - path: src/flowerClassifier/pipeline/step_2_prepare_base_model.py
+      hash: md5
+      md5: 83948333845fd4eca78b09abcd16a6ad
+      size: 951
+    params:
+      params.yaml:
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.01
+        NUM_CLASSES: 5
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/model_folder/base_model_updated.keras
+      hash: md5
+      md5: ceceeaf6313b39a1e954819ebe239b6a
+      size: 10250774
+  model_training:
+    cmd: python src/flowerClassifier/pipeline/step_3_train_base_model.py
+    deps:
+    - path: artifacts/data_ingestion/model
+      hash: md5
+      md5: c5129b327deb7bc3cd78fd098312ed5b.dir
+      size: 168164757
+      nfiles: 2746
+    - path: artifacts/model_folder/base_model_updated.keras
+      hash: md5
+      md5: ceceeaf6313b39a1e954819ebe239b6a
+      size: 10250774
+    - path: constant/config.yaml
+      hash: md5
+      md5: 92c03c76cd18c4c2ec010d5072a8da87
+      size: 746
+    - path: src/flowerClassifier/pipeline/step_3_train_base_model.py
+      hash: md5
+      md5: 11d4205c50cc015fa93f79dbf9231c2d
+      size: 923
+    params:
+      params.yaml:
+        BATCH_SIZE: 64
+        EARLY_STOPPING: true
+        EPOCHS: 10
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        LEARNING_RATE: 0.01
+        VALIDATION_SPLIT: 0.2
+    outs:
+    - path: artifacts/model_folder/trained_model.keras
+      hash: md5
+      md5: 90d1c511d70bddfda7548e98f016d76a
+      size: 11568165
+  evaluation:
+    cmd: python src/flowerClassifier/pipeline/step_4_model_evaluation.py
+    deps:
+    - path: artifacts/data_ingestion/model
+      hash: md5
+      md5: c5129b327deb7bc3cd78fd098312ed5b.dir
+      size: 168164757
+      nfiles: 2746
+    - path: artifacts/model_folder/trained_model.keras
+      hash: md5
+      md5: 90d1c511d70bddfda7548e98f016d76a
+      size: 11568165
+    - path: constant/config.yaml
+      hash: md5
+      md5: 92c03c76cd18c4c2ec010d5072a8da87
+      size: 746
+    - path: src/flowerClassifier/pipeline/step_4_model_evaluation.py
+      hash: md5
+      md5: 92c9c62009f6ac925f35e58f42eb26bf
+      size: 924
+    params:
+      params.yaml:
+        AUGMENTATION: true
+        BATCH_SIZE: 64
+        EARLY_STOPPING: true
+        EPOCHS: 10
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.01
+        NUM_CLASSES: 5
+        TEST_SPLIT: 0.1
+        VALIDATION_SPLIT: 0.2
+        WEIGHTS: imagenet
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: ad88116acf1009b810d1f3879d8e3d17
+      size: 72

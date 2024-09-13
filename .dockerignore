@@ -1,0 +1,14 @@
+# Ignore specific files
+dvc.lock
+dvc.yaml
+metrics.json
+
+
+# Ignore entire directories
+artifacts/data_ingestion
+Datasets/
+mlruns/
+research/
+
+# Ignore hidden files (optional)
+.*
