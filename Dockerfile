@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.8-slim-buster
+FROM python:3.11-slim-buster
 
 # Updates the system’s package information and then installs the AWS CLI tool in your Docker image
 RUN apt update -y && apt install awscli -y

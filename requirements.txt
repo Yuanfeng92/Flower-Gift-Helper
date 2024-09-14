@@ -1,16 +1,16 @@
-tensorflow==2.12.0
-pandas==2.0.0
-dvc
+tensorflow==2.17.0
+pandas
+dvc==3.55.2
 mlflow
-numpy==1.22.0
+numpy==1.26.4
 python-box
 PyYAML
 tqdm
 ensure
 joblib
 types-PyYAML
-scipy
+scipy==1.14.1
 gdown
-gradio==3.50.2
-pydantic==1.10.18 
+gradio==4.44.0
+pydantic==2.9.1
 -e .

@@ -2,6 +2,8 @@
 
 Welcome to the **Floral Gift Classifier**, a deep learning application designed to help users identify different types of flowers from images and discover their symbolic meanings. This project arose from the difficulty I faced when choosing the right flowers to gift my partner, so I decided to create an AI-powered solution to assist others facing the same challenge. Now, anyone can use this tool to select the perfect bouquet with confidence!
 
+![alt text](artifacts/images/app_screenshot.png)
+
 ## Features
 - **Accurate Flower Classification**: The core of the application is a highly accurate image classification model developed using **TensorFlow**. The model is based on **MobileNetV2**, which is known for being lightweight and optimized for speed and performance, making it suitable for deployment in environments with limited computational resources. Despite its efficiency, the model achieves an impressive accuracy of **92%**, ensuring reliable flower identification.
 
