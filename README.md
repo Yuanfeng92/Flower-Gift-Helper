@@ -1,6 +1,6 @@
 # Floral Gift Classifier 🌸
 
-Welcome to the **Floral Gift Classifier**, a deep learning application designed to help users identify different types of flowers from images and discover their symbolic meanings. This project arose from the difficulty I faced when choosing the right flowers to gift my partner, so I decided to create an AI-powered solution to assist others facing the same challenge. Now, anyone can use this tool to select the perfect bouquet with confidence!
+Welcome to the **Floral Gift Classifier**, a deep learning application designed to help users identify different types of flowers from images and discover their symbolic meanings. The inspiration for this project came from the struggle of picking the right flowers, leading to the development of an AI tool that helps users find the ideal bouquet for any occasion. Now, anyone can use this tool to select the perfect bouquet with confidence!
 
 ![alt text](artifacts/images/app_screenshot.png)
 

@@ -2,7 +2,7 @@
 dvc.lock
 dvc.yaml
 metrics.json
-
+restart_app_instructions.txt
 
 # Ignore entire directories
 artifacts/data_ingestion
